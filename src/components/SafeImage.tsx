@@ -4,19 +4,27 @@ import { useState, useEffect } from 'react';
 import Image, { ImageProps } from 'next/image';
 
 interface SafeImageProps extends Omit<ImageProps, 'src'> {
-  src: string;
+  src: string | undefined | null;
   fallbackSrc?: string;
 }
 
 export default function SafeImage({ src, fallbackSrc = '/images/placeholder.png', ...props }: SafeImageProps) {
-  const [imgSrc, setImgSrc] = useState<string>(src);
-  const [hasError, setHasError] = useState(false);
+  // Determine if initial source is invalid
+  const isInvalid = !src || src.includes('undefined') || src === '';
+  
+  const [imgSrc, setImgSrc] = useState<string>(isInvalid ? fallbackSrc : (src as string));
+  const [hasError, setHasError] = useState(isInvalid);
 
-  // Re-sync if the src prop changes
   useEffect(() => {
-    setImgSrc(src);
-    setHasError(false);
-  }, [src]);
+    const nextInvalid = !src || src.includes('undefined') || src === '';
+    if (nextInvalid) {
+      setImgSrc(fallbackSrc);
+      setHasError(true);
+    } else {
+      setImgSrc(src as string);
+      setHasError(false);
+    }
+  }, [src, fallbackSrc]);
 
   return (
     <Image

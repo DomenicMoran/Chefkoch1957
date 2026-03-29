@@ -84,65 +84,73 @@ h1, h2, h3, h4, .serif {
   transform: translateY(-4px);
 }
 
-/* Prose Refinement & Universal Centering OVERRIDE */
-.prose {
+/* --- ABSOLUTE NUCLEAR CENTERING (Phase 7 Final) --- */
+/* Force baseline centering for all block elements */
+body, main, section, .prose {
   text-align: center !important;
-  max-width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+  width: 100% !important;
 }
 
-/* Ensure all block children of prose are centered */
-.prose > *, .prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose div {
+/* Deep override for every prose child (Legacy Blogger HTML fix) */
+[class*='prose'] *, .prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose div, .prose blockquote {
   text-align: center !important;
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100% !important;
+  max-width: 850px !important;
 }
 
-/* Lists - Keep text left-aligned inside, but the list block centered */
+/* List Centering - Block centered, items left-aligned internal */
 .prose ul, .prose ol {
   display: inline-block !important;
   text-align: left !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: 2rem auto !important;
   width: auto !important;
-  min-width: fit-content !important;
+  min-width: 250px !important;
   max-width: 90% !important;
+  padding-left: 1.5rem !important;
 }
 
+.prose li {
+  text-align: left !important; /* Keep bullet text left, but container is centered */
+  width: auto !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Image Centering & Soft Framing */
 .prose img {
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: 3rem auto !important;
   display: block !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(212, 175, 55, 0.15) !important;
-  max-height: 500px !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  max-height: 550px !important;
   width: auto !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.5) !important;
 }
 
+/* Symmetrical Separators */
 .prose div.separator {
   width: 100% !important;
-  text-align: center !important;
-  clear: both !important;
-  float: none !important;
   display: flex !important;
   justify-content: center !important;
-  margin: 3rem 0 !important;
+  margin: 4rem 0 !important;
 }
 
-.prose a {
-  float: none !important;
-  margin: 0 auto !important;
-}
-
-/* Ensure P spacing is elegant */
+/* Elegant Paragraph Spacing */
 .prose p {
   margin-bottom: 2.5rem !important;
   line-height: 2.2 !important;
   font-weight: 300 !important;
-  max-width: 850px !important;
   font-family: var(--font-inter), sans-serif !important;
+}
+
+/* Foreword & Tribute Special Refinement */
+#foreword p, #tribute p {
+  width: 100% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
