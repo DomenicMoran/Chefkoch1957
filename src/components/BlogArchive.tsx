@@ -172,7 +172,7 @@ export default function BlogArchive() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl overflow-y-auto px-6 py-20 sm:p-20"
+            className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-3xl px-6 py-20 overflow-y-auto flex flex-col items-center"
           >
             {/* Nuclear Centering Override for Modal Content */}
             <style dangerouslySetInnerHTML={{ __html: `

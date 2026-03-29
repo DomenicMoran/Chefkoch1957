@@ -24,7 +24,7 @@ export default function Legal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-3xl px-6 py-20 overflow-y-auto"
+            className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-3xl px-6 py-20 overflow-y-auto flex flex-col items-center"
           >
             <button 
               onClick={() => setIsOpen(false)}
