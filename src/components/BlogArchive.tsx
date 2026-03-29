@@ -194,6 +194,7 @@ export default function BlogArchive() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
               className="max-w-4xl mx-auto space-y-16"
+              style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
             >
               <div className="text-center space-y-6">
                 <div className="flex flex-col items-center gap-4">
@@ -241,7 +242,8 @@ export default function BlogArchive() {
               )}
 
               <div 
-                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4 flex flex-col items-center w-full modal-prose"
+                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 px-4 w-full modal-prose"
+                style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                 dangerouslySetInnerHTML={{ __html: selectedPost.content }}
               />
               

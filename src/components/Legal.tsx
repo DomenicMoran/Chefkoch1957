@@ -53,7 +53,8 @@ export default function Legal() {
                 key={activeTab}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="prose prose-invert max-w-none text-center"
+                className="prose prose-invert max-w-none w-full"
+                style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
               >
                 {activeTab === 'impressum' ? (
                   <div className="space-y-10">
