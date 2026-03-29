@@ -233,7 +233,7 @@ export default function BlogArchive() {
               )}
 
               <div 
-                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4"
+                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4 flex flex-col items-center w-full"
                 dangerouslySetInnerHTML={{ __html: selectedPost.content }}
               />
               

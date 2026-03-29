@@ -1,0 +1,75 @@
+/* --- ABSOLUTE CENTERING SUPREMACY --- */
+/* This file is imported LATE in layout.tsx to override all other styles, including Tailwind and Prose. */
+
+body, main, section, .prose, .prose-invert {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force every single child element to inherit the centering */
+[class*='prose'] *, .prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose div, .prose blockquote, .prose section {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+  max-width: 850px !important;
+  float: none !important;
+  clear: both !important;
+}
+
+/* Handled List Symmetery - Block centered, items left-aligned internal for readability */
+.prose ul, .prose ol {
+  display: inline-block !important;
+  text-align: left !important;
+  margin: 2rem auto !important;
+  width: auto !important;
+  min-width: 250px !important;
+  max-width: 90% !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose li {
+  text-align: left !important; 
+  width: auto !important;
+}
+
+/* Image Centering & Framing */
+.prose img {
+  margin: 3.5rem auto !important;
+  display: block !important;
+  border-radius: 8px !important;
+  max-height: 600px !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* Symmetrical Separators and Dividers */
+.prose div.separator {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin: 4rem 0 !important;
+}
+
+/* Force P font-weights and alignment */
+.prose p {
+  text-align: center !important;
+  margin-bottom: 2.5rem !important;
+  line-height: 2.2 !important;
+}
+
+/* Explicit Overrides for Foreword and Tribute ID's */
+#foreword, #tribute, #archive {
+    text-align: center !important;
+}
+
+#foreword p, #tribute p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
