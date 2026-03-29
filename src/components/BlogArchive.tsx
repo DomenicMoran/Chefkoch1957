@@ -193,8 +193,7 @@ export default function BlogArchive() {
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="max-w-4xl mx-auto space-y-16"
-              style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
+              className="max-w-5xl mx-auto space-y-16 w-full"
             >
               <div className="text-center space-y-6">
                 <div className="flex flex-col items-center gap-4">
@@ -242,8 +241,7 @@ export default function BlogArchive() {
               )}
 
               <div 
-                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 px-4 w-full modal-prose"
-                style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 px-4 w-full modal-prose recipe-content"
                 dangerouslySetInnerHTML={{ __html: selectedPost.content }}
               />
               

@@ -84,9 +84,9 @@ h1, h2, h3, h4, .serif {
   transform: translateY(-4px);
 }
 
-/* --- ABSOLUTE NUCLEAR CENTERING (Phase 7 Final) --- */
+/* --- ABSOLUTE NUCLEAR CENTERING (Phase 10 Final) --- */
 /* Force baseline centering for all block elements */
-body, main, section, .prose {
+body, main, section, .prose, .prose-invert {
   text-align: center !important;
   display: flex !important;
   flex-direction: column !important;
@@ -94,30 +94,39 @@ body, main, section, .prose {
   width: 100% !important;
 }
 
-/* Deep override for every prose child (Legacy Blogger HTML fix) */
-[class*='prose'] *, .prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose div, .prose blockquote {
+/* DEEP TARGETING: This forces every child inside a prose container to be centered */
+.modal-prose, .recipe-content, [class*='prose'] {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+[class*='prose'] :is(p, h1, h2, h3, h4, h5, h6, div, blockquote, section, span, strong, em) {
   text-align: center !important;
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100% !important;
   max-width: 850px !important;
+  display: block !important;
 }
 
-/* List Centering - Block centered, items left-aligned internal */
-.prose ul, .prose ol {
+/* HANDLED LIST SYMMETRY - Block centered, items left-aligned internal for readability */
+[class*='prose'] :is(ul, ol) {
   display: inline-block !important;
   text-align: left !important;
   margin: 2rem auto !important;
   width: auto !important;
   min-width: 250px !important;
   max-width: 90% !important;
-  padding-left: 1.5rem !important;
+  padding-left: 2rem !important;
 }
 
-.prose li {
-  text-align: left !important; /* Keep bullet text left, but container is centered */
+[class*='prose'] li {
+  text-align: left !important; 
   width: auto !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
 /* Image Centering & Soft Framing */
