@@ -2,9 +2,9 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import postsData from '@/data/posts.json';
 import { Search, X, Calendar, ChefHat, ArrowUpRight, Loader2 } from 'lucide-react';
+import SafeImage from './SafeImage';
 
 interface Post {
   id: string;
@@ -104,7 +104,7 @@ export default function BlogArchive() {
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-secondary/20">
                 {post.images.length > 0 ? (
-                  <Image
+                  <SafeImage
                     src={`/images/archive/${post.images[0]}`}
                     alt={post.title}
                     fill
@@ -113,7 +113,7 @@ export default function BlogArchive() {
                   />
                 ) : (
                   <div className="relative w-full h-full bg-secondary/50">
-                    <Image
+                    <SafeImage
                       src="/images/placeholder.png"
                       alt="Chefkoch 1957 Memorial"
                       fill
@@ -210,7 +210,7 @@ export default function BlogArchive() {
                       transition={{ delay: 0.3 + (idx * 0.1) }}
                       className="relative aspect-square sm:aspect-video rounded-sm overflow-hidden border border-primary/10 shadow-2xl"
                     >
-                      <Image
+                      <SafeImage
                         src={`/images/archive/${img}`}
                         alt={selectedPost.title}
                         fill
@@ -222,7 +222,7 @@ export default function BlogArchive() {
               ) : (
                 <div className="max-w-2xl mx-auto px-4">
                   <div className="relative aspect-video rounded-sm overflow-hidden border border-primary/5 opacity-40 grayscale">
-                    <Image
+                    <SafeImage
                       src="/images/placeholder.png"
                       alt="Chefkoch 1957 Memorial"
                       fill

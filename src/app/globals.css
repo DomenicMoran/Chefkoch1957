@@ -84,27 +84,43 @@ h1, h2, h3, h4, .serif {
   transform: translateY(-4px);
 }
 
-/* Prose Refinement & Universal Centering Override */
+/* Prose Refinement & Universal Centering OVERRIDE */
 .prose {
   text-align: center !important;
+  max-width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
 }
 
-.prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-  width: 100% !important;
+/* Ensure all block children of prose are centered */
+.prose > *, .prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose div {
   text-align: center !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  width: 100% !important;
+}
+
+/* Lists - Keep text left-aligned inside, but the list block centered */
+.prose ul, .prose ol {
+  display: inline-block !important;
+  text-align: left !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important;
+  min-width: fit-content !important;
+  max-width: 90% !important;
 }
 
 .prose img {
   margin-left: auto !important;
   margin-right: auto !important;
   display: block !important;
-  border-radius: 4px !important;
-  border: 1px solid rgba(212, 175, 55, 0.1) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(212, 175, 55, 0.15) !important;
+  max-height: 500px !important;
+  width: auto !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
 }
 
 .prose div.separator {
@@ -114,7 +130,7 @@ h1, h2, h3, h4, .serif {
   float: none !important;
   display: flex !important;
   justify-content: center !important;
-  margin: 2rem 0 !important;
+  margin: 3rem 0 !important;
 }
 
 .prose a {
@@ -122,16 +138,11 @@ h1, h2, h3, h4, .serif {
   margin: 0 auto !important;
 }
 
-.prose ul, .prose ol {
-  display: inline-block !important;
-  text-align: left !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
+/* Ensure P spacing is elegant */
 .prose p {
-  margin-bottom: 2rem;
-  line-height: 2.2;
-  font-weight: 300;
-  max-width: 800px;
+  margin-bottom: 2.5rem !important;
+  line-height: 2.2 !important;
+  font-weight: 300 !important;
+  max-width: 850px !important;
+  font-family: var(--font-inter), sans-serif !important;
 }

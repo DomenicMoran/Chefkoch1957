@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function Tribute() {
   return (
-    <section className="section-padding bg-secondary/30 relative overflow-hidden text-center">
+    <section id="tribute" className="section-padding bg-secondary/30 relative overflow-hidden text-center">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -29,12 +29,12 @@ export default function Tribute() {
               <span className="text-secondary uppercase tracking-[0.4em] text-[10px] opacity-40">Mein Großvater, Unser Koch, Unser Vorbild</span>
             </div>
             
-            <div className="prose prose-invert max-w-none">
-              <p className="text-2xl md:text-3xl font-serif leading-loose text-foreground/95 italic mb-16 px-4">
+            <div className="prose prose-invert max-w-none text-center flex flex-col items-center">
+              <p className="text-2xl md:text-3xl font-serif leading-loose text-foreground/95 italic mb-16 px-4 mx-auto text-center">
                 &bdquo;Mein Großvater, Roger Wachholtz, war nicht nur ein begnadeter Koch, sondern auch ein unglaublich toller Mensch. Er war ein Kämpfer, ein Mann mit einem unerschütterlichen Willen.&ldquo;
               </p>
 
-              <div className="space-y-12 text-xl text-foreground/80 leading-relaxed font-light">
+              <div className="space-y-12 text-xl text-foreground/80 leading-relaxed font-light text-center mx-auto max-w-3xl">
                 <p>
                   Dieses Projekt, das seine Rezepte und Geschichten aus seinem Blog „Chefkoch 1957“ bewahrt, ist mein Versuch, sein Licht am Leuchten zu halten – für meine Großmutter, für unsere Familie und für jeden, der seine Worte liest und seine Gerichte nachkocht. Als er 2016 seinen Blog startete, war es für ihn nicht nur ein Hobby, sondern eine Möglichkeit, seine Erinnerungen und Rezepte mit der Welt zu teilen. 
                 </p>
@@ -56,23 +56,19 @@ export default function Tribute() {
               </div>
             </div>
 
-            <div className="pt-20 text-center flex flex-col items-center gap-6">
-              <div className="w-[1px] h-12 bg-primary/20" />
-              <div className="space-y-2">
-                <span className="text-secondary uppercase tracking-[0.3em] text-[10px] block opacity-60">Aus tiefem Herzen</span>
-                <span className="text-primary font-serif text-3xl tracking-widest italic gold-text">Domenic Moran</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Symmetrical Quote Mark at the bottom */}
-          <div className="flex justify-center mt-12 opacity-5">
-            <div className="text-primary/10 text-[10rem] font-serif leading-none rotate-180 select-none">
-              &ldquo;
+            {/* Signature Area */}
+            <div className="pt-20 space-y-4">
+              <div className="w-12 h-[1px] bg-primary/20 mx-auto mb-6" />
+              <p className="font-serif italic text-2xl text-primary/60">Domenic Moran</p>
+              <p className="text-[10px] uppercase tracking-[0.5em] text-accent opacity-40">Berlin, im M&auml;rz 2024</p>
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Decorative Background Elements */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 blur-[120px] rounded-full" />
+      <div className="absolute bottom-0 right-0 translate-x-1/4 w-64 h-64 bg-primary/5 blur-[100px] rounded-full" />
     </section>
   );
 }
