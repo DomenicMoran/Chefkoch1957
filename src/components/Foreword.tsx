@@ -24,7 +24,7 @@ export default function Foreword() {
               Roger Wachholtz hat alle Rezepte, die auf dieser Webseite zu finden sind, großzügig und kostenfrei auf seinem Blog zur Verfügung gestellt. Dieses digitale Denkmal bewahrt sein Werk und führt seine Vision fort. 
             </p>
             <p>
-              Ursprünglich als Buch geplant, verwebt Roger darin oft persönliche Erinnerungen an vergangene Zeiten oder erzählt, wie er die einzelnen Gerichte entdeckt und lieben gelernt hat. Zum Gedenken an Rogers Wohltätigkeit werden wir Spenden an das <strong>Vivantes Hospiz gGmbH</strong> in Berlin sowie zur Unterstützung seiner Ehefrau, <strong>Bettina Wachholtz</strong>, koordinieren.
+              Ursprünglich als Buch geplant, verwebt Roger darin oft persönliche Erinnerungen an vergangene Zeiten oder erzählt, wie er die einzelnen Gerichte entdeckt und lieben gelernt hat. Es war sein Herzenswunsch, sein Wissen und seine Freude am Kochen mit so vielen Menschen wie möglich zu teilen.
             </p>
             <div className="pt-8 border-t border-primary/5">
               <p className="text-xs uppercase tracking-widest opacity-40">Herausgeber-Notiz</p>

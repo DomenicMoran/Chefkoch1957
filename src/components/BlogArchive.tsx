@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import postsData from '@/data/posts.json';
-import { Search, X, Calendar, ChefHat, ArrowUpRight } from 'lucide-react';
+import { Search, X, Calendar, ChefHat, ArrowUpRight, Loader2 } from 'lucide-react';
 
 interface Post {
   id: string;
@@ -14,9 +14,13 @@ interface Post {
   images: string[];
 }
 
+const ITEMS_PER_PAGE = 30;
+
 export default function BlogArchive() {
   const [search, setSearch] = useState('');
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   const filteredPosts = useMemo(() => {
     return (postsData as Post[]).filter(post => 
@@ -25,10 +29,30 @@ export default function BlogArchive() {
     ).sort((a, b) => 0); // Preserving chronological extraction order
   }, [search]);
 
+  // Reset pagination on search
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [search]);
+
+  // Infinite Scroll Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && visibleCount < filteredPosts.length) {
+        setVisibleCount(prev => prev + ITEMS_PER_PAGE);
+      }
+    }, { threshold: 0.1 });
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [visibleCount, filteredPosts.length]);
+
   return (
     <section className="section-padding bg-background relative overflow-hidden text-center">
       {/* Search Header Container */}
-      <div className="max-w-6xl mx-auto px-6 mb-24 space-y-12">
+      <div className="max-w-6xl mx-auto px-6 mb-24 space-y-12 pb-20 border-b border-primary/5">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -36,7 +60,7 @@ export default function BlogArchive() {
           className="space-y-6"
         >
           <div className="flex flex-col items-center gap-4 mb-4">
-            <span className="text-accent uppercase tracking-[0.5em] text-[10px] opacity-40">Das kulinarsiche Archiv</span>
+            <span className="text-secondary uppercase tracking-[0.5em] text-[10px] opacity-40">Das kulinarsiche Archiv</span>
             <h2 className="text-4xl md:text-6xl font-serif gold-gradient leading-tight">Das Vermächtnis</h2>
             <div className="w-16 h-[1px] bg-primary/20 mx-auto" />
           </div>
@@ -68,7 +92,7 @@ export default function BlogArchive() {
       {/* Posts Grid - Balanced & Responsive */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredPosts.slice(0, 50).map((post, index) => (
+          {filteredPosts.slice(0, visibleCount).map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
@@ -115,14 +139,22 @@ export default function BlogArchive() {
           ))}
         </div>
         
-        {filteredPosts.length > 50 && (
-          <div className="mt-20 py-12 border-t border-primary/5 flex flex-col items-center gap-4">
-            <span className="text-accent text-[10px] uppercase tracking-[0.4em] opacity-40">Entdeckungsreise</span>
-            <p className="text-foreground/30 italic text-sm">
-              Insgesamt {filteredPosts.length} kulinarische Eintr&auml;ge gefunden...
-            </p>
-          </div>
-        )}
+        {/* Loader/Sentinel for Infinite Scroll */}
+        <div ref={loaderRef} className="mt-20 py-12 flex flex-col items-center gap-4">
+          {visibleCount < filteredPosts.length ? (
+            <div className="flex flex-col items-center gap-4 animate-pulse">
+              <Loader2 className="w-6 h-6 text-primary animate-spin" />
+              <span className="text-accent text-[10px] uppercase tracking-[0.4em] opacity-40">Weitere Rezepte laden...</span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4 py-20 border-t border-primary/5">
+              <span className="text-accent text-[10px] uppercase tracking-[0.4em] opacity-40">Entdeckungsreise</span>
+              <p className="text-foreground/30 italic text-sm">
+                Sie haben alle {filteredPosts.length} kulinarischen Eintr&auml;ge entdeckt.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Post Detail Modal - Premium Design */}
