@@ -18,7 +18,7 @@ export const metadata = {
   description: 'Ein Denkmal für einen leidenschaftlichen Koch und seine kulinarische Reise.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${inter.variable} ${playfair.variable}`}>
       <body>{children}</body>
