@@ -174,6 +174,14 @@ export default function BlogArchive() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl overflow-y-auto px-6 py-20 sm:p-20"
           >
+            {/* Nuclear Centering Override for Modal Content */}
+            <style dangerouslySetInnerHTML={{ __html: `
+              .modal-prose * { text-align: center !important; }
+              .modal-prose ul, .modal-prose ol { display: inline-block !important; text-align: left !important; margin: 2rem auto !important; }
+              .modal-prose li { text-align: left !important; }
+              .modal-prose img { margin: 3rem auto !important; display: block !important; }
+            `}} />
+
             <button 
               onClick={() => setSelectedPost(null)}
               className="fixed top-8 right-8 z-[110] bg-white/5 p-4 rounded-full hover:bg-white/10 transition-all border border-white/10 group"
@@ -233,7 +241,7 @@ export default function BlogArchive() {
               )}
 
               <div 
-                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4 flex flex-col items-center w-full"
+                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4 flex flex-col items-center w-full modal-prose"
                 dangerouslySetInnerHTML={{ __html: selectedPost.content }}
               />
               
