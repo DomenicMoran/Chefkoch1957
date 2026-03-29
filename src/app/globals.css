@@ -84,9 +84,9 @@ h1, h2, h3, h4, .serif {
   transform: translateY(-4px);
 }
 
-/* --- ABSOLUTE NUCLEAR CENTERING (Phase 10 Final) --- */
+/* --- ABSOLUTE NUCLEAR CENTERING (Phase 12 Final) --- */
 /* Force baseline centering for all block elements */
-body, main, section, .prose, .prose-invert {
+body, main, section {
   text-align: center !important;
   display: flex !important;
   flex-direction: column !important;
@@ -94,16 +94,20 @@ body, main, section, .prose, .prose-invert {
   width: 100% !important;
 }
 
-/* DEEP TARGETING: This forces every child inside a prose container to be centered */
-.modal-prose, .recipe-content, [class*='prose'] {
+/* THE MEMORIAL PROSE SYSTEM - Premium Typography & Absolute Symmetry */
+.memorial-prose {
   text-align: center !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   width: 100% !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-family: var(--font-inter), sans-serif !important;
+  line-height: 2.2 !important;
 }
 
-[class*='prose'] :is(p, h1, h2, h3, h4, h5, h6, div, blockquote, section, span, strong, em) {
+/* Deep Child Targeting for absolute symmetry */
+.memorial-prose :is(p, h1, h2, h3, h4, h5, h6, div, blockquote, section, span, strong, em) {
   text-align: center !important;
   margin-left: auto !important;
   margin-right: auto !important;
@@ -112,21 +116,61 @@ body, main, section, .prose, .prose-invert {
   display: block !important;
 }
 
+/* Premium Headers */
+.memorial-prose :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-playfair), serif !important;
+  font-style: italic !important;
+  color: #d4af37 !important; /* Gold tone for subheaders */
+  margin-top: 3rem !important;
+  margin-bottom: 2rem !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.4 !important;
+}
+
+.memorial-prose p {
+  margin-bottom: 2.5rem !important;
+  font-size: 1.125rem !important; /* text-lg */
+  font-weight: 300 !important;
+}
+
 /* HANDLED LIST SYMMETRY - Block centered, items left-aligned internal for readability */
-[class*='prose'] :is(ul, ol) {
+.memorial-prose :is(ul, ol) {
   display: inline-block !important;
   text-align: left !important;
-  margin: 2rem auto !important;
+  margin: 3rem auto !important;
   width: auto !important;
   min-width: 250px !important;
   max-width: 90% !important;
-  padding-left: 2rem !important;
+  padding-left: 2.5rem !important;
+  border-left: 1px solid rgba(212, 175, 55, 0.2) !important;
 }
 
-[class*='prose'] li {
+.memorial-prose li {
   text-align: left !important; 
   width: auto !important;
   margin-bottom: 0.75rem !important;
+  list-style-type: none !important;
+  position: relative !important;
+}
+
+/* Custom Gold Bullet Points */
+.memorial-prose li::before {
+  content: '•';
+  color: #d4af37;
+  position: absolute;
+  left: -1.5rem;
+  font-weight: bold;
+}
+
+/* Image Centering & Framing */
+.memorial-prose img {
+  margin: 4rem auto !important;
+  display: block !important;
+  border-radius: 4px !important;
+  max-height: 550px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Image Centering & Soft Framing */

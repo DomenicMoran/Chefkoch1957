@@ -172,7 +172,7 @@ export default function BlogArchive() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-3xl px-6 py-20 overflow-y-auto flex flex-col items-center"
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl overflow-y-auto px-6 py-20 sm:p-20 flex flex-col items-center"
           >
             {/* Nuclear Centering Override for Modal Content */}
             <style dangerouslySetInnerHTML={{ __html: `
@@ -197,15 +197,14 @@ export default function BlogArchive() {
             >
               <div className="text-center space-y-6">
                 <div className="flex flex-col items-center gap-4">
-                  <span className="text-accent uppercase tracking-[0.4em] text-[10px] opacity-60">Rezept & Geschichte</span>
-                  <h2 className="text-4xl md:text-7xl font-serif leading-tight gold-gradient">
-                    {selectedPost.title}
-                  </h2>
-                  <div className="flex items-center justify-center gap-4 text-xs tracking-widest text-primary/40 uppercase">
-                    <Calendar className="w-3 h-3" />
-                    {selectedPost.date}
-                  </div>
+                  <div className="w-12 h-[1px] bg-primary/30" />
+                  <span className="text-primary font-serif italic tracking-widest text-sm translate-y-2">
+                    {new Date(selectedPost.date).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </span>
                 </div>
+                <h2 className="text-5xl md:text-7xl font-serif italic text-white tracking-tight leading-tight">
+                  {selectedPost.title}
+                </h2>
               </div>
 
               {selectedPost.images.length > 0 ? (
@@ -241,7 +240,7 @@ export default function BlogArchive() {
               )}
 
               <div 
-                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 px-4 w-full modal-prose recipe-content"
+                className="memorial-prose pt-16 border-t border-primary/5 px-4 w-full"
                 dangerouslySetInnerHTML={{ __html: selectedPost.content }}
               />
               
