@@ -44,16 +44,46 @@ h1, h2, h3, h4, .serif {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
 
+/* Typography Utilities */
 .gold-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f7e1ad 50%, #d4af37 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #f9e29f 50%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.section-padding {
-  padding: 120px 24px;
+.gold-text {
+  color: var(--primary);
+}
+
+.prose {
+  color: var(--foreground-muted);
+}
+
+/* Transitions */
+.transition-slow {
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism Refinement */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 }
 
 @media (max-width: 768px) {

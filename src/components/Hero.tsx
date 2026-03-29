@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
       {/* Background Image Container */}
       <motion.div 
         initial={{ scale: 1.1, opacity: 0 }}
