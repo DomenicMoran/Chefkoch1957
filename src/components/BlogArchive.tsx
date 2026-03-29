@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import postsData from '@/data/posts.json';
-import { Search, X, Calendar, ChefHat } from 'lucide-react';
+import { Search, X, Calendar, ChefHat, ArrowUpRight } from 'lucide-react';
 
 interface Post {
   id: string;
@@ -22,141 +22,175 @@ export default function BlogArchive() {
     return (postsData as Post[]).filter(post => 
       post.title.toLowerCase().includes(search.toLowerCase()) ||
       post.content.toLowerCase().includes(search.toLowerCase())
-    ).sort((a, b) => {
-      // Very basic date sorting if format is consistent (Tag, TT. Monat JJJJ)
-      // Since it's German, we'll just keep the extraction order which is likely chronological
-      return 0; 
-    });
+    ).sort((a, b) => 0); // Preserving chronological extraction order
   }, [search]);
 
   return (
-    <section className="section-padding bg-background/50">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif mb-6 gold-gradient">Das Kulinarische Vermächtnis</h2>
-          <p className="text-foreground/60 max-w-2xl mx-auto text-lg font-light">
-            Alle Rezepte, Geschichten und Erinnerungen aus Rogers Blog &bdquo;Chefkoch 1957&ldquo;.
+    <section className="section-padding bg-background relative overflow-hidden text-center">
+      {/* Search Header Container */}
+      <div className="max-w-6xl mx-auto px-6 mb-24 space-y-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
+          <div className="flex flex-col items-center gap-4 mb-4">
+            <span className="text-accent uppercase tracking-[0.5em] text-[10px] opacity-40">Das kulinarsiche Archiv</span>
+            <h2 className="text-4xl md:text-6xl font-serif gold-gradient leading-tight">Das Vermächtnis</h2>
+            <div className="w-16 h-[1px] bg-primary/20 mx-auto" />
+          </div>
+          <p className="text-foreground/40 max-w-xl mx-auto text-lg font-light leading-relaxed italic">
+            Entdecken Sie &uuml;ber 600 Rezepte, Geschichten und kulinarische Erinnerungen aus Rogers Original-Blog.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-12 relative">
+        {/* Search Bar - Overhauled with Premium Styling */}
+        <div className="max-w-xl mx-auto relative group">
+          <div className="absolute inset-0 bg-primary/5 blur-xl group-focus-within:bg-primary/10 transition-colors rounded-full" />
           <input
             type="text"
-            placeholder="Rezept suchen..."
-            className="w-full bg-secondary/50 border border-primary/10 rounded-full py-4 px-12 text-foreground focus:outline-none focus:border-primary/30 transition-colors"
+            placeholder="Nach Rezepten oder Zutaten suchen..."
+            className="w-full bg-secondary/40 backdrop-blur-xl border border-primary/10 rounded-full py-6 px-14 text-foreground text-center focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all text-lg font-light placeholder:text-foreground/20"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-primary/40 w-5 h-5" />
+          <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/30 w-5 h-5 group-hover:text-primary/60 transition-colors" />
           {search && (
             <X 
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 cursor-pointer w-5 h-5" 
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-primary/40 cursor-pointer w-5 h-5 hover:text-primary transition-colors" 
               onClick={() => setSearch('')}
             />
           )}
         </div>
+      </div>
 
-        {/* Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.slice(0, 100).map((post, index) => (
+      {/* Posts Grid - Balanced & Responsive */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {filteredPosts.slice(0, 50).map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: (index % 10) * 0.05 }}
+              transition={{ delay: (index % 6) * 0.05 }}
               onClick={() => setSelectedPost(post)}
-              className="glass-panel group cursor-pointer overflow-hidden rounded-lg flex flex-col"
+              className="glass-panel group cursor-pointer overflow-hidden rounded-sm flex flex-col p-2"
             >
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative aspect-[4/5] overflow-hidden bg-secondary/20">
                 {post.images.length > 0 ? (
                   <Image
                     src={`/images/archive/${post.images[0]}`}
                     alt={post.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                   />
                 ) : (
-                  <div className="w-full h-full bg-secondary flex items-center justify-center">
-                    <ChefHat className="text-primary/10 w-12 h-12" />
+                  <div className="w-full h-full flex items-center justify-center opacity-10">
+                    <ChefHat className="w-16 h-16" />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <span className="text-white text-xs uppercase tracking-widest border border-white/40 px-4 py-2">Rezept lesen</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="absolute top-4 right-4 translate-x-4 -translate-y-4 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <div className="bg-primary/20 p-2 rounded-full backdrop-blur-xl border border-primary/20">
+                    <ArrowUpRight className="text-primary w-4 h-4" />
+                  </div>
                 </div>
               </div>
               
-              <div className="p-6 flex-grow flex flex-col">
-                <div className="flex items-center gap-2 text-[10px] text-accent uppercase tracking-widest mb-3 opacity-60">
+              <div className="p-8 text-center flex flex-col gap-4">
+                <div className="flex items-center justify-center gap-3 text-[9px] text-accent uppercase tracking-[0.3em] opacity-40 group-hover:opacity-80 transition-opacity">
                   <Calendar className="w-3 h-3" />
                   {post.date}
                 </div>
-                <h4 className="text-xl font-serif text-foreground/90 group-hover:text-primary transition-colors leading-tight mb-4">
+                <h4 className="text-xl md:text-2xl font-serif text-foreground/80 group-hover:text-primary transition-colors leading-snug">
                   {post.title}
                 </h4>
+                <div className="w-8 h-[1px] bg-primary/10 mx-auto group-hover:w-16 transition-all duration-500" />
               </div>
             </motion.div>
           ))}
         </div>
         
-        {filteredPosts.length > 100 && (
-          <div className="text-center mt-12 text-foreground/40 text-sm italic">
-            Insgesamt {filteredPosts.length} Rezepte gefunden. Scrolle weiter für mehr...
+        {filteredPosts.length > 50 && (
+          <div className="mt-20 py-12 border-t border-primary/5 flex flex-col items-center gap-4">
+            <span className="text-accent text-[10px] uppercase tracking-[0.4em] opacity-40">Entdeckungsreise</span>
+            <p className="text-foreground/30 italic text-sm">
+              Insgesamt {filteredPosts.length} kulinarische Eintr&auml;ge gefunden...
+            </p>
           </div>
         )}
       </div>
 
-      {/* Post Detail Modal */}
+      {/* Post Detail Modal - Premium Design */}
       <AnimatePresence>
         {selectedPost && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/90 backdrop-blur-xl overflow-y-auto pt-20"
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-3xl overflow-y-auto px-6 py-20 sm:p-20"
           >
-            <div className="max-w-4xl mx-auto px-6 pb-20">
-              <button 
-                onClick={() => setSelectedPost(null)}
-                className="fixed top-8 right-8 z-[60] bg-secondary/80 p-3 rounded-full hover:bg-primary/20 transition-colors"
-              >
-                <X className="w-6 h-6 text-primary" />
-              </button>
+            <button 
+              onClick={() => setSelectedPost(null)}
+              className="fixed top-8 right-8 z-[110] bg-white/5 p-4 rounded-full hover:bg-white/10 transition-all border border-white/10 group"
+            >
+              <X className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+            </button>
 
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                className="space-y-12"
-              >
-                <div className="text-center space-y-4">
-                  <div className="text-accent uppercase tracking-[0.3em] text-xs opacity-60">
-                    {selectedPost.date}
-                  </div>
-                  <h2 className="text-4xl md:text-6xl font-serif leading-tight">
+            <motion.div
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="max-w-4xl mx-auto space-y-16"
+            >
+              <div className="text-center space-y-6">
+                <div className="flex flex-col items-center gap-4">
+                  <span className="text-accent uppercase tracking-[0.4em] text-[10px] opacity-60">Rezept & Geschichte</span>
+                  <h2 className="text-4xl md:text-7xl font-serif leading-tight gold-gradient">
                     {selectedPost.title}
                   </h2>
+                  <div className="flex items-center gap-4 text-xs tracking-widest text-primary/40 uppercase">
+                    <Calendar className="w-3 h-3" />
+                    {selectedPost.date}
+                  </div>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {selectedPost.images.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
                   {selectedPost.images.map((img, idx) => (
-                    <div key={idx} className="relative aspect-[4/3] rounded-lg overflow-hidden glass-panel">
+                    <motion.div 
+                      key={idx}
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.3 + (idx * 0.1) }}
+                      className="relative aspect-square sm:aspect-video rounded-sm overflow-hidden border border-primary/10 shadow-2xl"
+                    >
                       <Image
                         src={`/images/archive/${img}`}
                         alt={selectedPost.title}
                         fill
                         className="object-cover"
                       />
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
+              )}
 
-                <div 
-                  className="prose prose-invert prose-p:text-xl prose-p:leading-loose max-w-none pt-12 border-t border-primary/10"
-                  dangerouslySetInnerHTML={{ __html: selectedPost.content }}
-                />
-              </motion.div>
-            </div>
+              <div 
+                className="prose prose-invert prose-p:text-xl prose-p:leading-loose prose-p:font-light prose-p:text-foreground/80 max-w-none pt-16 border-t border-primary/5 text-center px-4"
+                dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+              />
+              
+              <div className="pt-20 text-center text-primary/20 flex flex-col items-center gap-4">
+                <ChefHat className="w-8 h-8 opacity-40" />
+                <span className="text-[10px] uppercase tracking-[0.5em] italic font-light">&ndash; In Gedenken an Roger &ndash;</span>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
