@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import Foreword from '@/components/Foreword';
 import Tribute from '@/components/Tribute';
 import BlogArchive from '@/components/BlogArchive';
+import Legal from '@/components/Legal';
 import { ChefHat } from 'lucide-react';
 
 export default function Home() {
@@ -44,7 +45,8 @@ export default function Home() {
       <footer className="py-16 px-6 border-t border-border/10 text-center bg-secondary/5">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 text-foreground/40 text-[10px] uppercase tracking-[0.2em]">
           <p>&copy; {new Date().getFullYear()} Chefkoch 1957 Memorial Archive</p>
-          <div className="flex gap-12 text-center md:text-right">
+          <div className="flex gap-12 items-center text-center md:text-right">
+            <Legal />
             <span>In Gedenken an Roger Wachholtz</span>
             <span>Von Domenic Moran</span>
           </div>

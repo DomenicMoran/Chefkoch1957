@@ -68,51 +68,70 @@ h1, h2, h3, h4, .serif {
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
 }
 
-/* Containers */
+/* Glass Effects - Deeper & Smoother */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   transition: var(--transition);
 }
 
 .glass-panel:hover {
-  border-color: rgba(212, 175, 55, 0.2);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 175, 55, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
 }
 
-/* Animations */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(30px);
+/* Prose Refinement & Universal Centering Override */
+.prose {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
+.prose p, .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  width: 100% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+.prose img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(212, 175, 55, 0.1) !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 10px;
+.prose div.separator {
+  width: 100% !important;
+  text-align: center !important;
+  clear: both !important;
+  float: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin: 2rem 0 !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+.prose a {
+  float: none !important;
+  margin: 0 auto !important;
 }
 
-/* Prose Refinement */
+.prose ul, .prose ol {
+  display: inline-block !important;
+  text-align: left !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .prose p {
   margin-bottom: 2rem;
-  line-height: 2;
+  line-height: 2.2;
   font-weight: 300;
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
+  max-width: 800px;
 }

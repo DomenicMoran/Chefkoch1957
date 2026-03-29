@@ -112,8 +112,16 @@ export default function BlogArchive() {
                     className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center opacity-10">
-                    <ChefHat className="w-16 h-16" />
+                  <div className="relative w-full h-full bg-secondary/50">
+                    <Image
+                      src="/images/placeholder.png"
+                      alt="Chefkoch 1957 Memorial"
+                      fill
+                      className="object-cover opacity-30 group-hover:opacity-50 transition-opacity grayscale"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <ChefHat className="w-12 h-12 text-primary/20" />
+                    </div>
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
@@ -185,14 +193,14 @@ export default function BlogArchive() {
                   <h2 className="text-4xl md:text-7xl font-serif leading-tight gold-gradient">
                     {selectedPost.title}
                   </h2>
-                  <div className="flex items-center gap-4 text-xs tracking-widest text-primary/40 uppercase">
+                  <div className="flex items-center justify-center gap-4 text-xs tracking-widest text-primary/40 uppercase">
                     <Calendar className="w-3 h-3" />
                     {selectedPost.date}
                   </div>
                 </div>
               </div>
 
-              {selectedPost.images.length > 0 && (
+              {selectedPost.images.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
                   {selectedPost.images.map((img, idx) => (
                     <motion.div 
@@ -210,6 +218,17 @@ export default function BlogArchive() {
                       />
                     </motion.div>
                   ))}
+                </div>
+              ) : (
+                <div className="max-w-2xl mx-auto px-4">
+                  <div className="relative aspect-video rounded-sm overflow-hidden border border-primary/5 opacity-40 grayscale">
+                    <Image
+                      src="/images/placeholder.png"
+                      alt="Chefkoch 1957 Memorial"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
               )}
 
